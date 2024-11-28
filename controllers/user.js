@@ -3,11 +3,6 @@ const User = require('../models/user');
 const sharp = require('sharp');
 const cloudinary = require('../helper/imageUpload');
 
-if (!process.env.JWT_SECRET) {
-  console.error('JWT_SECRET is not defined in the environment variables.');
-  process.exit(1); // Stop the server if JWT_SECRET is missing
-}
-
 exports.createUser = async (req, res) => {
   const { fullname, email, password } = req.body;
   const isNewUser = await User.isThisEmailInUse(email);
